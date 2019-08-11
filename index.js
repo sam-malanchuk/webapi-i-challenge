@@ -15,7 +15,7 @@ server.post('/api/users', (req, res) => {
         .catch(err => {
             res.status(500).json({
                 err: err,
-                errorMessage: 'failed to create new user'
+                error: "There was an error while saving the user to the database"
             });
         });
     } else {
@@ -23,6 +23,19 @@ server.post('/api/users', (req, res) => {
             errorMessage: "Please provide name and bio for the user."
         });
     }
+});
+
+// GET find()
+server.get('/api/users', (req, res) => {
+    db.find()
+        .then(users => {
+            res.json(users);
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: "The users information could not be retrieved."
+            })
+        });
 });
 
 server.listen(4000, () => {
